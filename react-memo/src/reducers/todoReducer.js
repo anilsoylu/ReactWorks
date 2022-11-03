@@ -1,5 +1,4 @@
 function todoReducer(state, action) {
-  // eslint-disable-next-line default-case
   switch (action.type) {
     case "SET_TODO":
       return {
@@ -12,6 +11,13 @@ function todoReducer(state, action) {
         todo: "",
         todos: [...state.todos, action.todo],
       };
+    case "SET_SEARCH":
+      return {
+        ...state,
+        search: action.value,
+      };
+    default:
+      break;
   }
 }
 
