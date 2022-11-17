@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from "react";
+import React from "react";
 
 function GlobalState() {
   return <div>GlobalState</div>;
