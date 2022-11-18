@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import ResultCart from "./ResultCart";
 
@@ -9,14 +10,13 @@ function Add() {
     e.preventDefault();
     setQuery(e.target.value);
 
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1&include_adult=false&query=${e.target.value}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (!data.errors) {
-          setResults(data.results);
+    axios
+      .get(
+        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1&include_adult=false&query=${e.target.value}`
+      )
+      .then((res) => {
+        if (!res.data.errors) {
+          setResults(res.data.results);
         } else {
           setResults([]);
         }
