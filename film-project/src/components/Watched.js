@@ -15,7 +15,7 @@ function Watched() {
         {!!watched && (
           <div className="movie-grid">
             {watched.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
+              <MovieCard key={movie.id} movie={movie} type="watched" />
             ))}
           </div>
         )}

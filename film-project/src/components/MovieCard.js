@@ -1,7 +1,7 @@
 import React from "react";
 import MovieControls from "./MovieControls";
 
-function MovieCard({ movie }) {
+function MovieCard({ movie, type }) {
   return (
     <div className="movie-card">
       <div className="overlay"></div>
@@ -14,7 +14,7 @@ function MovieCard({ movie }) {
         <div className="filler-poster"></div>
       )}
 
-      <MovieControls movie={movie} />
+      <MovieControls movie={movie} type={type} />
     </div>
   );
 }

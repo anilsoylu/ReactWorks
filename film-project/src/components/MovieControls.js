@@ -2,19 +2,37 @@ import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
 function MovieControls({ movie, type }) {
-  const { removeMovieFromWatchList, addMovieToWatched } =
+  const { removeMovieFromWatchList, addMovieToWatched, moveToWatchList } =
     useContext(GlobalContext);
   return (
     <div className="inner-card-controls">
-      <button className="ctrl-btn" onClick={() => addMovieToWatched(movie)}>
-        <i className="fa-fw far fa-eye"></i>
-      </button>
-      <button
-        className="ctrl-btn"
-        onClick={() => removeMovieFromWatchList(movie.id)}
-      >
-        <i className="fa-fw fa fa-trash"></i>
-      </button>
+      {type === "watchlist" && (
+        <>
+          <button className="ctrl-btn" onClick={() => addMovieToWatched(movie)}>
+            <i className="fa-fw far fa-eye"></i>
+          </button>
+          <button
+            className="ctrl-btn"
+            onClick={() => removeMovieFromWatchList(movie.id)}
+          >
+            <i className="fa-fw fa fa-trash"></i>
+          </button>
+        </>
+      )}
+
+      {type === "watched" && (
+        <>
+          <button className="ctrl-btn" onClick={() => moveToWatchList(movie)}>
+            <i className="fa-fw far fa-eye-slash"></i>
+          </button>
+          <button
+            className="ctrl-btn"
+            onClick={() => removeMovieFromWatchList(movie.id)}
+          >
+            <i className="fa-fw fa fa-trash"></i>
+          </button>
+        </>
+      )}
     </div>
   );
 }
