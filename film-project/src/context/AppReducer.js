@@ -1,5 +1,3 @@
-import { act } from "react-dom/test-utils";
-
 function reducer(state, action) {
   switch (action.type) {
     case "ADD_MOVIE_TO_WATCHLIST":
