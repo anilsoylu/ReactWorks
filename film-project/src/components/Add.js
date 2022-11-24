@@ -1,28 +1,52 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ResultCart from "./ResultCart";
 
 function Add() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
-  function onChangeHandler(e) {
-    e.preventDefault();
-    setQuery(e.target.value);
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1&include_adult=false&query=${query}`
+        );
 
-    axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1&include_adult=false&query=${e.target.value}`
-      )
-      .then((res) => {
         if (!res.data.errors) {
           setResults(res.data.results);
         } else {
           setResults([]);
         }
-      })
-      .catch((err) => console.log(err));
-  }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (query.length > 0) {
+      getMovies();
+    } else {
+      setResults([]);
+    }
+  }, [query]);
+
+  // function onChangeHandler(e) {
+  //   e.preventDefault();
+  //   setQuery(e.target.value);
+
+  //   axios
+  //     .get(
+  //       `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1&include_adult=false&query=${e.target.value}`
+  //     )
+  //     .then((res) => {
+  //       if (!res.data.errors) {
+  //         setResults(res.data.results);
+  //       } else {
+  //         setResults([]);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   return (
     <div className="add-page">
@@ -43,7 +67,7 @@ function Add() {
               type="text"
               value={query}
               placeholder="Film, dizi, kişi ara..."
-              onChange={onChangeHandler}
+              onChange={(e) => setQuery(e.target.value)}
             />
           </div>
 
