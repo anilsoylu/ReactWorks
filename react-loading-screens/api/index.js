@@ -4,11 +4,15 @@ const app = express();
 app.use(express.json());
 
 app.get("/api/user/1", (req, res) => {
-  res.json(user);
+  setTimeout(() => {
+    res.json(user);
+  }, 2500);
 });
 
 app.get("/api/videos", (req, res) => {
-  res.json(videos);
+  setTimeout(() => {
+    res.json(videos);
+  }, 2500);
 });
 
 app.listen(5000, () => {
